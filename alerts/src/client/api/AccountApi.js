@@ -13,326 +13,354 @@
  *
  */
 
-import {ApiClient} from "../ApiClient";
-import {Account} from '../model/Account';
+import { ApiClient } from "../ApiClient";
+import { Account } from "../model/Account";
 
 /**
-* Account service.
-* @module api/AccountApi
-* @version v1
-*/
+ * Account service.
+ * @module api/AccountApi
+ * @version v1
+ */
 export class AccountApi {
+  /**
+   * Constructs a new AccountApi.
+   * @alias module:api/AccountApi
+   * @class
+   * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
+   * default to {@link module:ApiClient#instance} if unspecified.
+   */
+  constructor(apiClient) {
+    this.apiClient = apiClient || ApiClient.instance;
+  }
 
-    /**
-    * Constructs a new AccountApi. 
-    * @alias module:api/AccountApi
-    * @class
-    * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
-    * default to {@link module:ApiClient#instance} if unspecified.
-    */
-    constructor(apiClient) {
-        this.apiClient = apiClient || ApiClient.instance;
-    }
+  /**
+   * General ViewSet description
+   * @param {module:model/Account} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Account} and HTTP response
+   */
+  accountCreateWithHttpInfo(data) {
+    let postBody = data;
 
-
-
-    /**
-     * General ViewSet description
-     * @param {module:model/Account} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Account} and HTTP response
-     */
-    accountCreateWithHttpInfo(data) {
-      let postBody = data;
-
-      // verify the required parameter 'data' is set
-      if (data === undefined || data === null) {
-        throw new Error("Missing the required parameter 'data' when calling accountCreate");
-      }
-
-
-      let pathParams = {
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = Account;
-
-      return this.apiClient.callApi(
-        '/account', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'data' is set
+    if (data === undefined || data === null) {
+      throw new Error(
+        "Missing the required parameter 'data' when calling accountCreate"
       );
     }
 
-    /**
-     * General ViewSet description
-     * @param {module:model/Account} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Account}
-     */
-    accountCreate(data) {
-      return this.accountCreateWithHttpInfo(data)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
+    let pathParams = {};
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Account;
 
-    /**
-     * General ViewSet description
-     * @param {String} uuid A UUID string identifying this account.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
-     */
-    accountDeleteWithHttpInfo(uuid) {
-      let postBody = null;
+    return this.apiClient.callApi(
+      "/account",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
 
-      // verify the required parameter 'uuid' is set
-      if (uuid === undefined || uuid === null) {
-        throw new Error("Missing the required parameter 'uuid' when calling accountDelete");
-      }
+  /**
+   * General ViewSet description
+   * @param {module:model/Account} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Account}
+   */
+  accountCreate(data) {
+    return this.accountCreateWithHttpInfo(data).then(function(
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
 
+  /**
+   * General ViewSet description
+   * @param {String} uuid A UUID string identifying this account.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  accountDeleteWithHttpInfo(uuid) {
+    let postBody = null;
 
-      let pathParams = {
-        'uuid': uuid
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = null;
-
-      return this.apiClient.callApi(
-        '/account/{uuid}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'uuid' is set
+    if (uuid === undefined || uuid === null) {
+      throw new Error(
+        "Missing the required parameter 'uuid' when calling accountDelete"
       );
     }
 
-    /**
-     * General ViewSet description
-     * @param {String} uuid A UUID string identifying this account.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
-     */
-    accountDelete(uuid) {
-      return this.accountDeleteWithHttpInfo(uuid)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
+    let pathParams = {
+      uuid: uuid
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = null;
 
-    /**
-     * List the alerts for a user
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Account>} and HTTP response
-     */
-    accountListWithHttpInfo() {
-      let postBody = null;
+    return this.apiClient.callApi(
+      "/account/{uuid}",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
 
+  /**
+   * General ViewSet description
+   * @param {String} uuid A UUID string identifying this account.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  accountDelete(uuid) {
+    return this.accountDeleteWithHttpInfo(uuid).then(function(
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
 
-      let pathParams = {
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
+  /**
+   * List the alerts for a user
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Account>} and HTTP response
+   */
+  accountListWithHttpInfo() {
+    let postBody = null;
 
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = [Account];
+    let pathParams = {};
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
-      return this.apiClient.callApi(
-        '/account', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = [Account];
+
+    return this.apiClient.callApi(
+      "/account",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
+
+  /**
+   * List the alerts for a user
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Account>}
+   */
+  accountList() {
+    return this.accountListWithHttpInfo().then(function(response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * General ViewSet description
+   * @param {String} uuid A UUID string identifying this account.
+   * @param {module:model/Account} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Account} and HTTP response
+   */
+  accountPartialUpdateWithHttpInfo(uuid, data) {
+    let postBody = data;
+
+    // verify the required parameter 'uuid' is set
+    if (uuid === undefined || uuid === null) {
+      throw new Error(
+        "Missing the required parameter 'uuid' when calling accountPartialUpdate"
       );
     }
 
-    /**
-     * List the alerts for a user
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Account>}
-     */
-    accountList() {
-      return this.accountListWithHttpInfo()
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * General ViewSet description
-     * @param {String} uuid A UUID string identifying this account.
-     * @param {module:model/Account} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Account} and HTTP response
-     */
-    accountPartialUpdateWithHttpInfo(uuid, data) {
-      let postBody = data;
-
-      // verify the required parameter 'uuid' is set
-      if (uuid === undefined || uuid === null) {
-        throw new Error("Missing the required parameter 'uuid' when calling accountPartialUpdate");
-      }
-
-      // verify the required parameter 'data' is set
-      if (data === undefined || data === null) {
-        throw new Error("Missing the required parameter 'data' when calling accountPartialUpdate");
-      }
-
-
-      let pathParams = {
-        'uuid': uuid
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = Account;
-
-      return this.apiClient.callApi(
-        '/account/{uuid}', 'PATCH',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'data' is set
+    if (data === undefined || data === null) {
+      throw new Error(
+        "Missing the required parameter 'data' when calling accountPartialUpdate"
       );
     }
 
-    /**
-     * General ViewSet description
-     * @param {String} uuid A UUID string identifying this account.
-     * @param {module:model/Account} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Account}
-     */
-    accountPartialUpdate(uuid, data) {
-      return this.accountPartialUpdateWithHttpInfo(uuid, data)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
+    let pathParams = {
+      uuid: uuid
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Account;
 
-    /**
-     * General ViewSet description
-     * @param {String} uuid A UUID string identifying this account.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Account} and HTTP response
-     */
-    accountReadWithHttpInfo(uuid) {
-      let postBody = null;
+    return this.apiClient.callApi(
+      "/account/{uuid}",
+      "PATCH",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
 
-      // verify the required parameter 'uuid' is set
-      if (uuid === undefined || uuid === null) {
-        throw new Error("Missing the required parameter 'uuid' when calling accountRead");
-      }
+  /**
+   * General ViewSet description
+   * @param {String} uuid A UUID string identifying this account.
+   * @param {module:model/Account} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Account}
+   */
+  accountPartialUpdate(uuid, data) {
+    return this.accountPartialUpdateWithHttpInfo(uuid, data).then(function(
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
 
+  /**
+   * General ViewSet description
+   * @param {String} uuid A UUID string identifying this account.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Account} and HTTP response
+   */
+  accountReadWithHttpInfo(uuid) {
+    let postBody = null;
 
-      let pathParams = {
-        'uuid': uuid
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = Account;
-
-      return this.apiClient.callApi(
-        '/account/{uuid}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'uuid' is set
+    if (uuid === undefined || uuid === null) {
+      throw new Error(
+        "Missing the required parameter 'uuid' when calling accountRead"
       );
     }
 
-    /**
-     * General ViewSet description
-     * @param {String} uuid A UUID string identifying this account.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Account}
-     */
-    accountRead(uuid) {
-      return this.accountReadWithHttpInfo(uuid)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
+    let pathParams = {
+      uuid: uuid
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Account;
 
-    /**
-     * General ViewSet description
-     * @param {String} uuid A UUID string identifying this account.
-     * @param {module:model/Account} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Account} and HTTP response
-     */
-    accountUpdateWithHttpInfo(uuid, data) {
-      let postBody = data;
+    return this.apiClient.callApi(
+      "/account/{uuid}",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
 
-      // verify the required parameter 'uuid' is set
-      if (uuid === undefined || uuid === null) {
-        throw new Error("Missing the required parameter 'uuid' when calling accountUpdate");
-      }
+  /**
+   * General ViewSet description
+   * @param {String} uuid A UUID string identifying this account.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Account}
+   */
+  accountRead(uuid) {
+    return this.accountReadWithHttpInfo(uuid).then(function(response_and_data) {
+      return response_and_data.data;
+    });
+  }
 
-      // verify the required parameter 'data' is set
-      if (data === undefined || data === null) {
-        throw new Error("Missing the required parameter 'data' when calling accountUpdate");
-      }
+  /**
+   * General ViewSet description
+   * @param {String} uuid A UUID string identifying this account.
+   * @param {module:model/Account} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Account} and HTTP response
+   */
+  accountUpdateWithHttpInfo(uuid, data) {
+    let postBody = data;
 
-
-      let pathParams = {
-        'uuid': uuid
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = Account;
-
-      return this.apiClient.callApi(
-        '/account/{uuid}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'uuid' is set
+    if (uuid === undefined || uuid === null) {
+      throw new Error(
+        "Missing the required parameter 'uuid' when calling accountUpdate"
       );
     }
 
-    /**
-     * General ViewSet description
-     * @param {String} uuid A UUID string identifying this account.
-     * @param {module:model/Account} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Account}
-     */
-    accountUpdate(uuid, data) {
-      return this.accountUpdateWithHttpInfo(uuid, data)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
+    // verify the required parameter 'data' is set
+    if (data === undefined || data === null) {
+      throw new Error(
+        "Missing the required parameter 'data' when calling accountUpdate"
+      );
     }
 
+    let pathParams = {
+      uuid: uuid
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Account;
+
+    return this.apiClient.callApi(
+      "/account/{uuid}",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
+
+  /**
+   * General ViewSet description
+   * @param {String} uuid A UUID string identifying this account.
+   * @param {module:model/Account} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Account}
+   */
+  accountUpdate(uuid, data) {
+    return this.accountUpdateWithHttpInfo(uuid, data).then(function(
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
 }
