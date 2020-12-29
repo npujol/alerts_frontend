@@ -13,7 +13,7 @@
         <span
           >&copy; {{ new Date().getFullYear() }}
           <router-link class="logo-font" :to="{ name: 'home', params: {} }"
-            >Stories</router-link
+            >Alerts</router-link
           >
           by <a href="https://github.com/npujol">Naivy Pujol Méndez</a></span
         >
