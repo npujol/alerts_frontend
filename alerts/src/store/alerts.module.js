@@ -4,7 +4,7 @@ import {
   FETCH_ALERT,
   FETCH_ALERTS,
   ALERT_CREATE,
-  ALERT_DELETE,
+  ALERT_DELETE
 } from "./actions.type.js";
 import {
   SET_ALERTS,
@@ -47,7 +47,7 @@ const getters = {
 const actions = {
   async [FETCH_ALERT](context, payload) {
     context.commit(SET_ALERTS_START);
-    const data = await alertsApi.alertsRead(payload);
+    const data = await alertsApi.alertsRead(payload.uuid);
     context.commit(SET_ALERT, data);
     return data;
   },
@@ -57,7 +57,7 @@ const actions = {
     return data;
   },
   async [ALERT_CREATE](context, payload) {
-    console.log(payload)
+    console.log(payload);
     const data = await alertsApi.alertsCreate(payload);
     context.dispatch(FETCH_ALERTS);
     return data;
@@ -82,7 +82,7 @@ const mutations = {
     state.isAlertsLoading = false;
   },
   [SET_ALERT](state, data) {
-    state.alert = data.results;
+    state.alert = data;
   }
 };
 
