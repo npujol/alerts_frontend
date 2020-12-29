@@ -1,10 +1,11 @@
-import { AlertsApi } from "../client";
+import { AlertsApi, AccountApi } from "../client";
 
 import {
   FETCH_ALERT,
   FETCH_ALERTS,
   ALERT_CREATE,
-  ALERT_DELETE
+  ALERT_DELETE,
+  ALERT_EDIT
 } from "./actions.type.js";
 import {
   SET_ALERTS,
@@ -14,13 +15,12 @@ import {
 } from "./mutations.type.js";
 
 const alertsApi = new AlertsApi();
+const accountApi = new AccountApi();
+
 const state = {
-  countNewAlerts: 0,
   alerts: [],
   countAlerts: 0,
-  isAlertsLoading: true,
-  alert: null,
-  limit: 10
+  alert: null
 };
 
 const getters = {
@@ -30,41 +30,38 @@ const getters = {
   alert(state) {
     return state.alert;
   },
-  countNewAlerts(state) {
-    return state.countNewAlerts;
-  },
-  isAlertsLoading(state) {
-    return state.isAlertsLoading;
-  },
   countAlerts(state) {
     return state.countAlerts;
-  },
-  limit(state) {
-    return state.limit;
   }
 };
 
 const actions = {
   async [FETCH_ALERT](context, payload) {
-    context.commit(SET_ALERTS_START);
     const data = await alertsApi.alertsRead(payload.uuid);
     context.commit(SET_ALERT, data);
     return data;
   },
   async [FETCH_ALERTS](context, payload) {
-    const data = await alertsApi.alertsList(payload);
-    context.commit(SET_ALERTS, data);
+    const data = await accountApi.accountRead(payload.uuid);
+    const results = await Promise.all(
+      data.alerts.map(element => alertsApi.alertsRead(element))
+    );
+    context.commit(SET_ALERTS, results);
     return data;
   },
   async [ALERT_CREATE](context, payload) {
-    console.log(payload);
     const data = await alertsApi.alertsCreate(payload);
-    context.dispatch(FETCH_ALERTS);
+    return data;
+  },
+  async [ALERT_EDIT](context, payload) {
+    const data = await alertsApi.alertsPartialUpdate(
+      payload.uuid,
+      payload.body
+    );
     return data;
   },
   async [ALERT_DELETE](context, payload) {
     await alertsApi.alertsDelete(payload.uuid);
-    context.dispatch(FETCH_ALERTS);
     return;
   }
 };
@@ -77,8 +74,8 @@ const mutations = {
     state.isAlertsLoading = true;
   },
   [SET_ALERTS](state, data) {
-    state.alerts = data.results;
-    state.countAlerts = data.count;
+    state.alerts = data;
+    state.countAlerts = data.length;
     state.isAlertsLoading = false;
   },
   [SET_ALERT](state, data) {

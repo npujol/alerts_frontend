@@ -3,8 +3,8 @@
     <div>
       <v-row justify="center">
         <v-alert
-          :icon="isOpenIcon"
-          :color="isOpenColor"
+          icon="mdi-email"
+          color="info"
           grow
           prominent
           text
@@ -13,11 +13,16 @@
         >
           <v-row align="center">
             <v-col>
-              {{ message.title }}
+              <div>Alert</div>
+              <p class="display-1 text--primary">Your alert in eBay</p>
+              <div class="text--primary">
+                Search Term: {{ alert.searchTerm }}<br />
+                Interval of time: {{ alert.intervalTime }}
+              </div>
             </v-col>
             <v-row class="shrink pa-4">
               <v-btn color="sucess" icon @click="dialog = true">
-                <v-icon> mdi-eye </v-icon>
+                <v-icon> mdi-pencil </v-icon>
               </v-btn>
               <v-btn
                 class="shrink pa-4"
@@ -33,41 +38,14 @@
         </v-alert>
 
         <v-dialog v-model="dialog" max-width="500px">
-          <v-card class="mx-auto" color="primary" dark max-width="500">
-            <v-card-title>
-              <v-icon medium left> mdi-bell </v-icon>
-              <span class="title font-weight-light">Notification</span>
-            </v-card-title>
-
-            <v-card-text class="headline font-weight-bold">
-              {{ message.body }}
-            </v-card-text>
-
+          <v-card class="mx-auto" dark max-width="500">
             <v-card-actions>
               <v-list-item class="grow">
-                <v-list-item-avatar color="grey darken-3">
-                  <v-img
-                    :src="preview"
-                    class="elevation-6"
-                    alt=""
-                    @click="
-                      linkTo('profile', { username: message.owner.username })
-                    "
-                  ></v-img>
-                </v-list-item-avatar>
-
-                <v-list-item-content>
-                  <v-list-item-title
-                    class="text-decoration-underline primary--text"
-                    @click="
-                      linkTo('profile', { username: message.owner.username })
-                    "
-                  >
-                    {{ message.owner.username }}
-                  </v-list-item-title>
-                </v-list-item-content>
-
                 <v-row align="center" justify="end">
+                  <v-card-title>
+                    <v-icon medium left> mdi-bell </v-icon>
+                    <span class="title font-weight-light">Alert</span>
+                  </v-card-title>
                   <v-btn
                     class="subheading mr-1"
                     text
@@ -80,6 +58,8 @@
                 </v-row>
               </v-list-item>
             </v-card-actions>
+
+            <AlertEdit :alert="alert"></AlertEdit>
           </v-card>
         </v-dialog>
       </v-row>
@@ -88,21 +68,20 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import { linkTo } from "./mixins/linkTo.js";
-import {
-  ALERT_DELETE,
-  FETCH_ALERTS
-} from "../store/actions.type.js";
+import AlertEdit from "./AlertEdit.vue";
+import { ALERT_DELETE, FETCH_ALERTS } from "../store/actions.type.js";
 
 export default {
   name: "Alert",
   mixins: [linkTo],
+  components: {
+    AlertEdit
+  },
   data() {
     return {
       dialog: false,
-      inProgress: false,
-      preview: "https://picsum.photos/510/300?random"
+      inProgress: false
     };
   },
   props: {
@@ -112,25 +91,7 @@ export default {
       default: null
     }
   },
-  computed: {
-    isOpenIcon() {
-      return this.message.opened === true ? "mdi-email-open" : "mdi-email";
-    },
-    isOpenColor() {
-      return this.message.opened === true ? "info lighten-2" : "info";
-    },
-    isOpened() {
-      return true;
-    }
-  },
   methods: {
-    async setMessageStatus(pk, opened) {
-      await this.$store.dispatch(ALERT_OPEN, {
-        pk,
-        opened
-      });
-      this.fetchAlerts();
-    },
     closeDialog() {
       this.dialog = false;
     },
@@ -141,10 +102,7 @@ export default {
       this.fetchAlerts();
     },
     async fetchAlerts() {
-      await this.$store.dispatch(FETCH_ALERTS, {
-        offset: 0,
-        limit: 10
-      });
+      await this.$store.dispatch(FETCH_ALERTS, { uuid: this.alert.owner.uuid });
     }
   }
 };

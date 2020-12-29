@@ -7,19 +7,19 @@
         </h3>
       </v-card-title>
       <v-card-text>
-        <AlertEditor> </AlertEditor>
+        <AlertCreate></AlertCreate>
       </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
-import AlertEditor from "../components/AlertEditor.vue";
+import AlertCreate from "../components/AlertCreate.vue";
 
 export default {
   name: "Home",
   components: {
-    AlertEditor
+    AlertCreate
   }
 };
 </script>

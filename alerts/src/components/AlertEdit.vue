@@ -3,17 +3,14 @@
     <v-card slot-scope="{ invalid, validated }">
       <v-card-text>
         <v-form>
-          <ValidationProvider name="email" rules="required|email">
-            <v-text-field
-              slot-scope="{ errors, valid }"
-              v-model="email"
-              :error-messages="errors"
-              :success="valid"
-              label="Email"
-              filled
-              required
-            ></v-text-field>
-          </ValidationProvider>
+          <v-text-field
+            v-model="email"
+            disabled
+            success
+            label="Email"
+            filled
+            required
+          ></v-text-field>
           <ValidationProvider name="search_term" rules="required">
             <v-text-field
               slot-scope="{ errors, valid }"
@@ -41,7 +38,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="error" @click="clear">Cancel</v-btn>
+        <v-btn color="error" @click="setInitialState()">Cancel</v-btn>
         <v-btn color="primary" @click="submit" :disabled="invalid || !validated"
           >OK</v-btn
         >
@@ -52,11 +49,18 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";
-import { ALERT_CREATE } from "../store/actions.type.js";
+import { ALERT_EDIT } from "../store/actions.type.js";
 
 export default {
-  name: "AlertEditor",
+  name: "AlertEdit",
   components: { ValidationProvider, ValidationObserver },
+  props: {
+    alert: {
+      type: Object,
+      required: true,
+      default: null
+    }
+  },
   data() {
     return {
       search_term: null,
@@ -69,9 +73,14 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.setInitialState();
+  },
   methods: {
-    async clear() {
-      this.search_term = this.interval = this.email = null;
+    async setInitialState() {
+      this.search_term = this.alert.searchTerm;
+      this.interval = this.alert.intervalTime;
+      this.email = this.alert.owner.email;
       this.$nextTick(() => {
         this.$refs.obs.reset();
       });
@@ -80,14 +89,15 @@ export default {
       const validated = await this.$refs.obs.validate();
       if (validated) {
         try {
-          await this.$store.dispatch(ALERT_CREATE, {
-            email: this.email,
-            search_term: this.search_term,
-            interval_time: this.interval
+          await this.$store.dispatch(ALERT_EDIT, {
+            uuid: this.alert.uuid,
+            body: {
+              search_term: this.search_term,
+              interval_time: this.interval
+            }
           });
-          this.$router.push({ name: "create-alert-confirmation" });
+          this.$router.go();
         } catch (response) {
-          console.log(response);
           const errors = JSON.parse(response.response.text).errors;
           this.$refs.obs.setErrors({
             search_term: errors.search_term,

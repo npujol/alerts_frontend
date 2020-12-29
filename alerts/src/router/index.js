@@ -13,7 +13,7 @@ const routes = [
   },
   {
     name: "account-alerts",
-    path: "/account-alerts/:uuid",
+    path: "/account/:uuid/alerts",
     component: () => import("../views/AlertsAccountListView.vue")
   },
   {
