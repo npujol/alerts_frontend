@@ -13,382 +13,418 @@
  *
  */
 
-import {ApiClient} from "../ApiClient";
-import {Alert} from '../model/Alert';
+import { ApiClient } from "../ApiClient";
+import { Alert } from "../model/Alert";
 
 /**
-* Alerts service.
-* @module api/AlertsApi
-* @version v1
-*/
+ * Alerts service.
+ * @module api/AlertsApi
+ * @version v1
+ */
 export class AlertsApi {
+  /**
+   * Constructs a new AlertsApi.
+   * @alias module:api/AlertsApi
+   * @class
+   * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
+   * default to {@link module:ApiClient#instance} if unspecified.
+   */
+  constructor(apiClient) {
+    this.apiClient = apiClient || ApiClient.instance;
+  }
 
-    /**
-    * Constructs a new AlertsApi. 
-    * @alias module:api/AlertsApi
-    * @class
-    * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
-    * default to {@link module:ApiClient#instance} if unspecified.
-    */
-    constructor(apiClient) {
-        this.apiClient = apiClient || ApiClient.instance;
-    }
+  /**
+   * Create an alert
+   * @param {module:model/Alert} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
+   */
+  alertsCreateWithHttpInfo(data) {
+    let postBody = data;
 
-
-
-    /**
-     * Create an alert
-     * @param {module:model/Alert} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
-     */
-    alertsCreateWithHttpInfo(data) {
-      let postBody = data;
-
-      // verify the required parameter 'data' is set
-      if (data === undefined || data === null) {
-        throw new Error("Missing the required parameter 'data' when calling alertsCreate");
-      }
-
-
-      let pathParams = {
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = Alert;
-
-      return this.apiClient.callApi(
-        '/alerts', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'data' is set
+    if (data === undefined || data === null) {
+      throw new Error(
+        "Missing the required parameter 'data' when calling alertsCreate"
       );
     }
 
-    /**
-     * Create an alert
-     * @param {module:model/Alert} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
-     */
-    alertsCreate(data) {
-      return this.alertsCreateWithHttpInfo(data)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
+    let pathParams = {};
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Alert;
 
-    /**
-     * Delete an alert
-     * @param {String} uuid A UUID string identifying this alert.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
-     */
-    alertsDeleteWithHttpInfo(uuid) {
-      let postBody = null;
+    return this.apiClient.callApi(
+      "/alerts",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
 
-      // verify the required parameter 'uuid' is set
-      if (uuid === undefined || uuid === null) {
-        throw new Error("Missing the required parameter 'uuid' when calling alertsDelete");
-      }
+  /**
+   * Create an alert
+   * @param {module:model/Alert} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
+   */
+  alertsCreate(data) {
+    return this.alertsCreateWithHttpInfo(data).then(function(
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
 
+  /**
+   * Delete an alert
+   * @param {String} uuid A UUID string identifying this alert.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+   */
+  alertsDeleteWithHttpInfo(uuid) {
+    let postBody = null;
 
-      let pathParams = {
-        'uuid': uuid
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = null;
-
-      return this.apiClient.callApi(
-        '/alerts/{uuid}', 'DELETE',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'uuid' is set
+    if (uuid === undefined || uuid === null) {
+      throw new Error(
+        "Missing the required parameter 'uuid' when calling alertsDelete"
       );
     }
 
-    /**
-     * Delete an alert
-     * @param {String} uuid A UUID string identifying this alert.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
-     */
-    alertsDelete(uuid) {
-      return this.alertsDeleteWithHttpInfo(uuid)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
+    let pathParams = {
+      uuid: uuid
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = null;
 
-    /**
-     * General ViewSet description
-     * @param {String} uuid A UUID string identifying this alert.
-     * @param {module:model/Alert} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
-     */
-    alertsEmailToDeleteWithHttpInfo(uuid, data) {
-      let postBody = data;
+    return this.apiClient.callApi(
+      "/alerts/{uuid}",
+      "DELETE",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
 
-      // verify the required parameter 'uuid' is set
-      if (uuid === undefined || uuid === null) {
-        throw new Error("Missing the required parameter 'uuid' when calling alertsEmailToDelete");
-      }
+  /**
+   * Delete an alert
+   * @param {String} uuid A UUID string identifying this alert.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+   */
+  alertsDelete(uuid) {
+    return this.alertsDeleteWithHttpInfo(uuid).then(function(
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
 
-      // verify the required parameter 'data' is set
-      if (data === undefined || data === null) {
-        throw new Error("Missing the required parameter 'data' when calling alertsEmailToDelete");
-      }
+  /**
+   * General ViewSet description
+   * @param {String} uuid A UUID string identifying this alert.
+   * @param {module:model/Alert} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
+   */
+  alertsEmailToDeleteWithHttpInfo(uuid, data) {
+    let postBody = data;
 
-
-      let pathParams = {
-        'uuid': uuid
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = Alert;
-
-      return this.apiClient.callApi(
-        '/alerts/{uuid}/email_to_delete', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'uuid' is set
+    if (uuid === undefined || uuid === null) {
+      throw new Error(
+        "Missing the required parameter 'uuid' when calling alertsEmailToDelete"
       );
     }
 
-    /**
-     * General ViewSet description
-     * @param {String} uuid A UUID string identifying this alert.
-     * @param {module:model/Alert} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
-     */
-    alertsEmailToDelete(uuid, data) {
-      return this.alertsEmailToDeleteWithHttpInfo(uuid, data)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * List the alerts
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Alert>} and HTTP response
-     */
-    alertsListWithHttpInfo() {
-      let postBody = null;
-
-
-      let pathParams = {
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = [Alert];
-
-      return this.apiClient.callApi(
-        '/alerts', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'data' is set
+    if (data === undefined || data === null) {
+      throw new Error(
+        "Missing the required parameter 'data' when calling alertsEmailToDelete"
       );
     }
 
-    /**
-     * List the alerts
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Alert>}
-     */
-    alertsList() {
-      return this.alertsListWithHttpInfo()
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
+    let pathParams = {
+      uuid: uuid
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Alert;
 
-    /**
-     * Patch an alert
-     * @param {String} uuid A UUID string identifying this alert.
-     * @param {module:model/Alert} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
-     */
-    alertsPartialUpdateWithHttpInfo(uuid, data) {
-      let postBody = data;
+    return this.apiClient.callApi(
+      "/alerts/{uuid}/email_to_delete",
+      "POST",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
 
-      // verify the required parameter 'uuid' is set
-      if (uuid === undefined || uuid === null) {
-        throw new Error("Missing the required parameter 'uuid' when calling alertsPartialUpdate");
-      }
+  /**
+   * General ViewSet description
+   * @param {String} uuid A UUID string identifying this alert.
+   * @param {module:model/Alert} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
+   */
+  alertsEmailToDelete(uuid, data) {
+    return this.alertsEmailToDeleteWithHttpInfo(uuid, data).then(function(
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
 
-      // verify the required parameter 'data' is set
-      if (data === undefined || data === null) {
-        throw new Error("Missing the required parameter 'data' when calling alertsPartialUpdate");
-      }
+  /**
+   * List the alerts
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Alert>} and HTTP response
+   */
+  alertsListWithHttpInfo() {
+    let postBody = null;
 
+    let pathParams = {};
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
-      let pathParams = {
-        'uuid': uuid
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = [Alert];
 
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = Alert;
+    return this.apiClient.callApi(
+      "/alerts",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
 
-      return this.apiClient.callApi(
-        '/alerts/{uuid}', 'PATCH',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+  /**
+   * List the alerts
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Alert>}
+   */
+  alertsList() {
+    return this.alertsListWithHttpInfo().then(function(response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Patch an alert
+   * @param {String} uuid A UUID string identifying this alert.
+   * @param {module:model/Alert} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
+   */
+  alertsPartialUpdateWithHttpInfo(uuid, data) {
+    let postBody = data;
+
+    // verify the required parameter 'uuid' is set
+    if (uuid === undefined || uuid === null) {
+      throw new Error(
+        "Missing the required parameter 'uuid' when calling alertsPartialUpdate"
       );
     }
 
-    /**
-     * Patch an alert
-     * @param {String} uuid A UUID string identifying this alert.
-     * @param {module:model/Alert} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
-     */
-    alertsPartialUpdate(uuid, data) {
-      return this.alertsPartialUpdateWithHttpInfo(uuid, data)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * Retrieve an alert
-     * @param {String} uuid A UUID string identifying this alert.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
-     */
-    alertsReadWithHttpInfo(uuid) {
-      let postBody = null;
-
-      // verify the required parameter 'uuid' is set
-      if (uuid === undefined || uuid === null) {
-        throw new Error("Missing the required parameter 'uuid' when calling alertsRead");
-      }
-
-
-      let pathParams = {
-        'uuid': uuid
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = Alert;
-
-      return this.apiClient.callApi(
-        '/alerts/{uuid}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'data' is set
+    if (data === undefined || data === null) {
+      throw new Error(
+        "Missing the required parameter 'data' when calling alertsPartialUpdate"
       );
     }
 
-    /**
-     * Retrieve an alert
-     * @param {String} uuid A UUID string identifying this alert.
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
-     */
-    alertsRead(uuid) {
-      return this.alertsReadWithHttpInfo(uuid)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
+    let pathParams = {
+      uuid: uuid
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
 
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Alert;
 
-    /**
-     * Update an alert
-     * @param {String} uuid A UUID string identifying this alert.
-     * @param {module:model/Alert} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
-     */
-    alertsUpdateWithHttpInfo(uuid, data) {
-      let postBody = data;
+    return this.apiClient.callApi(
+      "/alerts/{uuid}",
+      "PATCH",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
 
-      // verify the required parameter 'uuid' is set
-      if (uuid === undefined || uuid === null) {
-        throw new Error("Missing the required parameter 'uuid' when calling alertsUpdate");
-      }
+  /**
+   * Patch an alert
+   * @param {String} uuid A UUID string identifying this alert.
+   * @param {module:model/Alert} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
+   */
+  alertsPartialUpdate(uuid, data) {
+    return this.alertsPartialUpdateWithHttpInfo(uuid, data).then(function(
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
 
-      // verify the required parameter 'data' is set
-      if (data === undefined || data === null) {
-        throw new Error("Missing the required parameter 'data' when calling alertsUpdate");
-      }
+  /**
+   * Retrieve an alert
+   * @param {String} uuid A UUID string identifying this alert.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
+   */
+  alertsReadWithHttpInfo(uuid) {
+    let postBody = null;
 
-
-      let pathParams = {
-        'uuid': uuid
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Basic'];
-      let contentTypes = ['application/json'];
-      let accepts = ['application/json'];
-      let returnType = Alert;
-
-      return this.apiClient.callApi(
-        '/alerts/{uuid}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+    // verify the required parameter 'uuid' is set
+    if (uuid === undefined || uuid === null) {
+      throw new Error(
+        "Missing the required parameter 'uuid' when calling alertsRead"
       );
     }
 
-    /**
-     * Update an alert
-     * @param {String} uuid A UUID string identifying this alert.
-     * @param {module:model/Alert} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
-     */
-    alertsUpdate(uuid, data) {
-      return this.alertsUpdateWithHttpInfo(uuid, data)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
+    let pathParams = {
+      uuid: uuid
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Alert;
+
+    return this.apiClient.callApi(
+      "/alerts/{uuid}",
+      "GET",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
+
+  /**
+   * Retrieve an alert
+   * @param {String} uuid A UUID string identifying this alert.
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
+   */
+  alertsRead(uuid) {
+    return this.alertsReadWithHttpInfo(uuid).then(function(response_and_data) {
+      return response_and_data.data;
+    });
+  }
+
+  /**
+   * Update an alert
+   * @param {String} uuid A UUID string identifying this alert.
+   * @param {module:model/Alert} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
+   */
+  alertsUpdateWithHttpInfo(uuid, data) {
+    let postBody = data;
+
+    // verify the required parameter 'uuid' is set
+    if (uuid === undefined || uuid === null) {
+      throw new Error(
+        "Missing the required parameter 'uuid' when calling alertsUpdate"
+      );
     }
 
+    // verify the required parameter 'data' is set
+    if (data === undefined || data === null) {
+      throw new Error(
+        "Missing the required parameter 'data' when calling alertsUpdate"
+      );
+    }
 
+    let pathParams = {
+      uuid: uuid
+    };
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+
+    let authNames = ["Basic"];
+    let contentTypes = ["application/json"];
+    let accepts = ["application/json"];
+    let returnType = Alert;
+
+    return this.apiClient.callApi(
+      "/alerts/{uuid}",
+      "PUT",
+      pathParams,
+      queryParams,
+      headerParams,
+      formParams,
+      postBody,
+      authNames,
+      contentTypes,
+      accepts,
+      returnType
+    );
+  }
+
+  /**
+   * Update an alert
+   * @param {String} uuid A UUID string identifying this alert.
+   * @param {module:model/Alert} data
+   * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
+   */
+  alertsUpdate(uuid, data) {
+    return this.alertsUpdateWithHttpInfo(uuid, data).then(function(
+      response_and_data
+    ) {
+      return response_and_data.data;
+    });
+  }
 }

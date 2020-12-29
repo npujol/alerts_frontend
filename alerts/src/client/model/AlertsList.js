@@ -13,7 +13,7 @@
  *
  */
 
-import {ApiClient} from '../ApiClient';
+import { ApiClient } from "../ApiClient";
 
 /**
  * The AlertsList model module.
@@ -25,8 +25,8 @@ export class AlertsList {
    * Constructs a new <code>AlertsList</code>.
    * @alias module:model/AlertsList
    * @class
-   * @param searchTerm {String} 
-   * @param email {String} 
+   * @param searchTerm {String}
+   * @param email {String}
    */
   constructor(searchTerm, email) {
     this.searchTerm = searchTerm;
@@ -43,14 +43,17 @@ export class AlertsList {
   static constructFromObject(data, obj) {
     if (data) {
       obj = obj || new AlertsList();
-      if (data.hasOwnProperty('uuid'))
-        obj.uuid = ApiClient.convertToType(data['uuid'], 'String');
-      if (data.hasOwnProperty('search_term'))
-        obj.searchTerm = ApiClient.convertToType(data['search_term'], 'String');
-      if (data.hasOwnProperty('interval_time'))
-        obj.intervalTime = ApiClient.convertToType(data['interval_time'], 'String');
-      if (data.hasOwnProperty('email'))
-        obj.email = ApiClient.convertToType(data['email'], 'String');
+      if (data.hasOwnProperty("uuid"))
+        obj.uuid = ApiClient.convertToType(data["uuid"], "String");
+      if (data.hasOwnProperty("search_term"))
+        obj.searchTerm = ApiClient.convertToType(data["search_term"], "String");
+      if (data.hasOwnProperty("interval_time"))
+        obj.intervalTime = ApiClient.convertToType(
+          data["interval_time"],
+          "String"
+        );
+      if (data.hasOwnProperty("email"))
+        obj.email = ApiClient.convertToType(data["email"], "String");
     }
     return obj;
   }
@@ -100,5 +103,3 @@ AlertsList.prototype.intervalTime = undefined;
  * @member {String} email
  */
 AlertsList.prototype.email = undefined;
-
-
