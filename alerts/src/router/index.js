@@ -23,7 +23,7 @@ const routes = [
   },
   {
     name: "create-alert-confirmation",
-    path: "create-alert-confirmation",
+    path: "alert/:uuid/create-confirmation",
     component: () => import("../views/AlertCreateConfirmationView.vue")
   }
 ];

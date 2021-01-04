@@ -6,7 +6,7 @@
           Confirmation
         </div>
         <v-list-item-title class="headline mb-1">
-          Do you want to delete this alert.
+          Do you want to delete this alert: {{alert.uuid}}.
         </v-list-item-title>
         <v-list-item-subtitle
           >If you wanna delete this alert, make click in the
@@ -71,7 +71,7 @@ export default {
         uuid: this.alert.uuid
       });
       this.inProgress = false;
-      this.$router.push({ name: "home", params: {} });
+      this.$router.push({ name: 'home', params: {uuid: this.alert.owner.uuid} });
     }
   }
 };

@@ -57,7 +57,7 @@ const actions = {
     return data;
   },
   async [ALERT_DELETE](context, payload) {
-    await alertsApi.alertsDelete(payload.uuid);
+    await alertsApi.alertsEmailToDelete(payload.uuid, {});
     return;
   }
 };
