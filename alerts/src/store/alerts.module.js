@@ -1,4 +1,4 @@
-import { AlertsApi, AccountApi } from "../client";
+import { AlertsApi } from "../client";
 
 import {
   FETCH_ALERT,
@@ -15,7 +15,6 @@ import {
 } from "./mutations.type.js";
 
 const alertsApi = new AlertsApi();
-const accountApi = new AccountApi();
 
 const state = {
   alerts: [],
@@ -42,11 +41,8 @@ const actions = {
     return data;
   },
   async [FETCH_ALERTS](context, payload) {
-    const data = await accountApi.accountRead(payload.uuid);
-    const results = await Promise.all(
-      data.alerts.map(element => alertsApi.alertsRead(element))
-    );
-    context.commit(SET_ALERTS, results);
+    const data = await alertsApi.alertsList(payload.uuid);
+    context.commit(SET_ALERTS, data);
     return data;
   },
   async [ALERT_CREATE](context, payload) {
