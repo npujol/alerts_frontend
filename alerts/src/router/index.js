@@ -8,7 +8,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     name: "home",
-    path: "/",
+    path: "/:uuid?",
     component: () => import("../views/Home.vue")
   },
   {

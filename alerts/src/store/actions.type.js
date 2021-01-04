@@ -1,3 +1,4 @@
+export const FETCH_ACCOUNT = "fetchAccount";
 export const FETCH_ALERT = "fetchAlert";
 export const FETCH_ALERTS = "fetchAlerts";
 export const ALERT_DELETE = "deleteAlert";
