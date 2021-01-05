@@ -57,8 +57,8 @@ const actions = {
     return data;
   },
   async [ALERT_DELETE](context, payload) {
-    await alertsApi.alertsEmailToDelete(payload.uuid, {});
-    return;
+    const data = await alertsApi.alertsEmailToDelete(payload.uuid, {});
+    return data;
   }
 };
 

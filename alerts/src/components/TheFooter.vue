@@ -4,8 +4,8 @@
       <v-card-title class="d-flex text-center justify-center">
         <strong class="subheading">Get connected with us!</strong>
         <v-spacer></v-spacer>
-        <v-btn v-for="( obj, index) in links" :key="index" icon :href="obj.link">
-          <v-icon  size="24px">{{ obj.icon }}</v-icon>
+        <v-btn v-for="(obj, index) in links" :key="index" icon :href="obj.link">
+          <v-icon size="24px">{{ obj.icon }}</v-icon>
         </v-btn>
       </v-card-title>
 
@@ -27,12 +27,10 @@ export default {
   name: "TheFooter",
   data: () => ({
     links: [
-        { icon: "mdi-twitter", link: "https://twitter.com/nai_00_nai"},
-        { icon: "mdi-linkedin", link: "https://www.linkedin.com/in/npujolm/"},
-        { icon: "mdi-github", link: "https://github.com/npujol"},
-
-
-      ]
+      { icon: "mdi-twitter", link: "https://twitter.com/nai_00_nai" },
+      { icon: "mdi-linkedin", link: "https://www.linkedin.com/in/npujolm/" },
+      { icon: "mdi-github", link: "https://github.com/npujol" }
+    ]
   })
 };
 </script>

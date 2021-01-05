@@ -51,7 +51,6 @@
 </template>
 
 <script>
-
 import { mapGetters } from "vuex";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { ALERT_CREATE, FETCH_ACCOUNT } from "../store/actions.type.js";
@@ -74,8 +73,8 @@ export default {
   computed: {
     ...mapGetters(["account"])
   },
-  mounted(){
-    if(this.$route.params.uuid){
+  mounted() {
+    if (this.$route.params.uuid) {
       this.fetchAccount();
     }
   },
@@ -95,7 +94,10 @@ export default {
             search_term: this.search_term,
             interval_time: this.interval
           });
-          this.$router.push({ name: "create-alert-confirmation" , params:{uuid:data.uuid}});
+          this.$router.push({
+            name: "create-alert-confirmation",
+            params: { uuid: data.uuid }
+          });
         } catch (response) {
           const errors = JSON.parse(response.response.text).errors;
           this.$refs.obs.setErrors({
@@ -109,10 +111,10 @@ export default {
       await this.$store.dispatch(FETCH_ACCOUNT, {
         uuid: this.$route.params.uuid
       });
-      if( this.account){
-      this.email = this.account.email
+      if (this.account) {
+        this.email = this.account.email;
       }
-    },
+    }
   }
 };
 </script>

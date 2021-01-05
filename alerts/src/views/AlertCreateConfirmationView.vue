@@ -6,7 +6,7 @@
           Confirmation
         </div>
         <v-list-item-title class="headline mb-1">
-          You alert: {{alert.uuid}} was created .
+          You alert: {{ alert.uuid }} was created .
         </v-list-item-title>
         <v-list-item-subtitle
           >If you wanna get create a new alert, make click in the
@@ -42,7 +42,10 @@ export default {
       });
     },
     async goHome() {
-      this.$router.push({ name: 'home', params: {uuid: this.alert.owner.uuid} });
+      this.$router.push({
+        name: "home",
+        params: { uuid: this.alert.owner.uuid }
+      });
     }
   }
 };

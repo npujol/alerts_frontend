@@ -1,16 +1,12 @@
 import { AccountsApi } from "../client";
 
-import {
-  FETCH_ACCOUNT,
-} from "./actions.type.js";
-import {
-  SET_ACCOUNT,
-} from "./mutations.type.js";
+import { FETCH_ACCOUNT } from "./actions.type.js";
+import { SET_ACCOUNT } from "./mutations.type.js";
 
 const accountsApi = new AccountsApi();
 
 const state = {
-  account: null,
+  account: null
 };
 
 const getters = {

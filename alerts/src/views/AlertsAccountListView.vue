@@ -23,10 +23,13 @@ export default {
   name: "AlertsAccountList",
   components: {
     AlertsList
-  }, 
+  },
   methods: {
     goHome() {
-      this.$router.push({ name: "home", params:  {uuid: this.$route.params.uuid }});
+      this.$router.push({
+        name: "home",
+        params: { uuid: this.$route.params.uuid }
+      });
     }
   }
 };
