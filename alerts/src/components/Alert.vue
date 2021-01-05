@@ -131,7 +131,7 @@ export default {
     async destroy() {
       this.dialogDelete = true;
       this.isSentEmail = true;
-      const data = await this.$store.dispatch(ALERT_DELETE, {
+      await this.$store.dispatch(ALERT_DELETE, {
         uuid: this.alert.uuid
       });
       this.msg = "We are sending the email! You will receive the email soon.";
