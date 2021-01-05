@@ -37,7 +37,97 @@ export class AccountsApi {
 
 
     /**
-     * General ViewSet description
+     * Delete an account
+     * @param {String} uuid A UUID string identifying this account.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    accountsDeleteWithHttpInfo(uuid) {
+      let postBody = null;
+
+      // verify the required parameter 'uuid' is set
+      if (uuid === undefined || uuid === null) {
+        throw new Error("Missing the required parameter 'uuid' when calling accountsDelete");
+      }
+
+
+      let pathParams = {
+        'uuid': uuid
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['Basic'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = null;
+
+      return this.apiClient.callApi(
+        '/accounts/{uuid}', 'DELETE',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Delete an account
+     * @param {String} uuid A UUID string identifying this account.
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    accountsDelete(uuid) {
+      return this.accountsDeleteWithHttpInfo(uuid)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get a list of accounts
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link Array.<module:model/Account>} and HTTP response
+     */
+    accountsListWithHttpInfo() {
+      let postBody = null;
+
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['Basic'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = [Account];
+
+      return this.apiClient.callApi(
+        '/accounts', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get a list of accounts
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link Array.<module:model/Account>}
+     */
+    accountsList() {
+      return this.accountsListWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get an account
      * @param {String} uuid A UUID string identifying this account.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Account} and HTTP response
      */
@@ -73,7 +163,7 @@ export class AccountsApi {
     }
 
     /**
-     * General ViewSet description
+     * Get an account
      * @param {String} uuid A UUID string identifying this account.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Account}
      */
