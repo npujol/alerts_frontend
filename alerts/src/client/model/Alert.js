@@ -13,8 +13,8 @@
  *
  */
 
-import { ApiClient } from "../ApiClient";
-import { Account } from "./Account";
+import {ApiClient} from '../ApiClient';
+import {Account} from './Account';
 
 /**
  * The Alert model module.
@@ -26,8 +26,8 @@ export class Alert {
    * Constructs a new <code>Alert</code>.
    * @alias module:model/Alert
    * @class
-   * @param searchTerm {String}
-   * @param email {String}
+   * @param searchTerm {String} 
+   * @param email {String} 
    */
   constructor(searchTerm, email) {
     this.searchTerm = searchTerm;
@@ -44,19 +44,16 @@ export class Alert {
   static constructFromObject(data, obj) {
     if (data) {
       obj = obj || new Alert();
-      if (data.hasOwnProperty("uuid"))
-        obj.uuid = ApiClient.convertToType(data["uuid"], "String");
-      if (data.hasOwnProperty("owner"))
-        obj.owner = Account.constructFromObject(data["owner"]);
-      if (data.hasOwnProperty("search_term"))
-        obj.searchTerm = ApiClient.convertToType(data["search_term"], "String");
-      if (data.hasOwnProperty("interval_time"))
-        obj.intervalTime = ApiClient.convertToType(
-          data["interval_time"],
-          "String"
-        );
-      if (data.hasOwnProperty("email"))
-        obj.email = ApiClient.convertToType(data["email"], "String");
+      if (data.hasOwnProperty('uuid'))
+        obj.uuid = ApiClient.convertToType(data['uuid'], 'String');
+      if (data.hasOwnProperty('owner'))
+        obj.owner = Account.constructFromObject(data['owner']);
+      if (data.hasOwnProperty('search_term'))
+        obj.searchTerm = ApiClient.convertToType(data['search_term'], 'String');
+      if (data.hasOwnProperty('interval_time'))
+        obj.intervalTime = ApiClient.convertToType(data['interval_time'], 'String');
+      if (data.hasOwnProperty('email'))
+        obj.email = ApiClient.convertToType(data['email'], 'String');
     }
     return obj;
   }
@@ -106,9 +103,11 @@ Alert.IntervalTimeEnum = {
  * @member {module:model/Alert.IntervalTimeEnum} intervalTime
  * @default '30'
  */
-Alert.prototype.intervalTime = "30";
+Alert.prototype.intervalTime = '30';
 
 /**
  * @member {String} email
  */
 Alert.prototype.email = undefined;
+
+

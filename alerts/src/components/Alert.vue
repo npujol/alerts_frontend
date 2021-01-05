@@ -1,5 +1,5 @@
 <template>
-  <v-card outlined grow class="pa-2">
+  <v-card outlined grow class="pa-4">
     <div>
       <v-row justify="center">
         <v-alert
@@ -27,7 +27,7 @@
               <v-btn
                 class="shrink pa-4"
                 color="error"
-                :disabled="inProgress"
+                :disabled="isSentEmail"
                 icon
                 @click="destroy()"
               >
@@ -62,6 +62,34 @@
             <AlertEdit :alert="alert"></AlertEdit>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogDelete" max-width="500px">
+          <v-card class="mx-auto" dark max-width="500">
+            <v-card-actions>
+              <v-list-item class="grow">
+                <v-row align="center" justify="end">
+                  <v-card-title>
+                    <v-icon medium left> mdi-alert </v-icon>
+                    <span class="title font-weight-light"
+                      >Delete the alert: {{ alert.uuid }}</span
+                    >
+                  </v-card-title>
+                  <v-btn
+                    class="subheading mr-1"
+                    text
+                    icon
+                    small
+                    @click="closeDialogDelete()"
+                  >
+                    <v-icon> mdi-close </v-icon>
+                  </v-btn>
+                </v-row>
+              </v-list-item>
+            </v-card-actions>
+            <v-card-text>
+              {{ msg }}
+            </v-card-text>
+          </v-card>
+        </v-dialog>
       </v-row>
     </div>
   </v-card>
@@ -81,7 +109,9 @@ export default {
   data() {
     return {
       dialog: false,
-      inProgress: false
+      dialogDelete: false,
+      msg: null,
+      isSentEmail: false
     };
   },
   props: {
@@ -95,10 +125,16 @@ export default {
     closeDialog() {
       this.dialog = false;
     },
+    closeDialogDelete() {
+      this.dialogDelete = false;
+    },
     async destroy() {
-      this.inProgress = true;
-      await this.$store.dispatch(ALERT_DELETE, { uuid: this.alert.uuid });
-      this.inProgress = false;
+      this.dialogDelete = true;
+      this.isSentEmail = true;
+      const data = await this.$store.dispatch(ALERT_DELETE, {
+        uuid: this.alert.uuid
+      });
+      this.msg = "We are sending the email! You will receive the email soon.";
       this.fetchAlerts();
     },
     async fetchAlerts() {

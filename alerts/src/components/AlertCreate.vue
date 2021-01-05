@@ -51,8 +51,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
-import { ALERT_CREATE } from "../store/actions.type.js";
+import { ALERT_CREATE, FETCH_ACCOUNT } from "../store/actions.type.js";
 
 export default {
   name: "AlertCreate",
@@ -69,6 +70,14 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapGetters(["account"])
+  },
+  mounted() {
+    if (this.$route.params.uuid) {
+      this.fetchAccount();
+    }
+  },
   methods: {
     async clear() {
       this.search_term = this.interval = this.email = null;
@@ -80,12 +89,15 @@ export default {
       const validated = await this.$refs.obs.validate();
       if (validated) {
         try {
-          await this.$store.dispatch(ALERT_CREATE, {
+          const data = await this.$store.dispatch(ALERT_CREATE, {
             email: this.email,
             search_term: this.search_term,
             interval_time: this.interval
           });
-          this.$router.push({ name: "create-alert-confirmation" });
+          this.$router.push({
+            name: "create-alert-confirmation",
+            params: { uuid: data.uuid }
+          });
         } catch (response) {
           const errors = JSON.parse(response.response.text).errors;
           this.$refs.obs.setErrors({
@@ -93,6 +105,14 @@ export default {
             intervals: errors.interval_time
           });
         }
+      }
+    },
+    async fetchAccount() {
+      await this.$store.dispatch(FETCH_ACCOUNT, {
+        uuid: this.$route.params.uuid
+      });
+      if (this.account) {
+        this.email = this.account.email;
       }
     }
   }

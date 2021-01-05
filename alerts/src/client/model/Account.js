@@ -13,7 +13,7 @@
  *
  */
 
-import { ApiClient } from "../ApiClient";
+import {ApiClient} from '../ApiClient';
 
 /**
  * The Account model module.
@@ -25,10 +25,8 @@ export class Account {
    * Constructs a new <code>Account</code>.
    * @alias module:model/Account
    * @class
-   * @param alerts {Array.<String>}
    */
-  constructor(alerts) {
-    this.alerts = alerts;
+  constructor() {
   }
 
   /**
@@ -41,12 +39,12 @@ export class Account {
   static constructFromObject(data, obj) {
     if (data) {
       obj = obj || new Account();
-      if (data.hasOwnProperty("uuid"))
-        obj.uuid = ApiClient.convertToType(data["uuid"], "String");
-      if (data.hasOwnProperty("email"))
-        obj.email = ApiClient.convertToType(data["email"], "String");
-      if (data.hasOwnProperty("alerts"))
-        obj.alerts = ApiClient.convertToType(data["alerts"], ["String"]);
+      if (data.hasOwnProperty('uuid'))
+        obj.uuid = ApiClient.convertToType(data['uuid'], 'String');
+      if (data.hasOwnProperty('email'))
+        obj.email = ApiClient.convertToType(data['email'], 'String');
+      if (data.hasOwnProperty('alerts'))
+        obj.alerts = ApiClient.convertToType(data['alerts'], ['String']);
     }
     return obj;
   }
@@ -66,3 +64,5 @@ Account.prototype.email = undefined;
  * @member {Array.<String>} alerts
  */
 Account.prototype.alerts = undefined;
+
+

@@ -8,7 +8,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     name: "home",
-    path: "/",
+    path: "/:uuid?",
     component: () => import("../views/Home.vue")
   },
   {
@@ -23,7 +23,7 @@ const routes = [
   },
   {
     name: "create-alert-confirmation",
-    path: "create-alert-confirmation",
+    path: "alert/:uuid/create-confirmation",
     component: () => import("../views/AlertCreateConfirmationView.vue")
   }
 ];

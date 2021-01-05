@@ -3,13 +3,7 @@
     <div class="d-flex text-center justify-center" v-if="countAlerts === 0">
       No alerts are here... yet.
     </div>
-    <Alert
-      v-else
-      class="mb-2"
-      v-for="(alert, index) in alerts"
-      :alert="alert"
-      :key="index"
-    >
+    <Alert v-else v-for="(alert, index) in alerts" :alert="alert" :key="index">
     </Alert>
     <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
   </v-container>
