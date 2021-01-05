@@ -33,9 +33,9 @@ export class ApiClient {
         /**
          * The base URL against which to resolve every API call's (relative) path.
          * @type {String}
-         * @default http://localhost:8000/api
+         * @default http://192.168.178.24:8000/api
          */
-        this.basePath = 'http://localhost:8000/api'.replace(/\/+$/, '');
+        this.basePath = 'http://192.168.178.24:8000/api'.replace(/\/+$/, '');
 
         /**
          * The authentication methods to be included for all API calls.

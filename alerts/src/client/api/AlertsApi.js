@@ -137,7 +137,7 @@ export class AlertsApi {
      * Send an email to delete an alert
      * @param {String} uuid A UUID string identifying this alert.
      * @param {module:model/Alert} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Alert} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
     alertsEmailToDeleteWithHttpInfo(uuid, data) {
       let postBody = data;
@@ -166,7 +166,7 @@ export class AlertsApi {
       let authNames = ['Basic'];
       let contentTypes = ['application/json'];
       let accepts = ['application/json'];
-      let returnType = Alert;
+      let returnType = null;
 
       return this.apiClient.callApi(
         '/alerts/{uuid}/email_to_delete', 'POST',
@@ -179,7 +179,7 @@ export class AlertsApi {
      * Send an email to delete an alert
      * @param {String} uuid A UUID string identifying this alert.
      * @param {module:model/Alert} data 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Alert}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
     alertsEmailToDelete(uuid, data) {
       return this.alertsEmailToDeleteWithHttpInfo(uuid, data)
