@@ -13,7 +13,7 @@ const apiClient = ApiClient.instance;
 if (process.env.NODE_ENV === "production") {
   apiClient.basePath = "/api";
 } else {
-  apiClient.basePath = "http://localhost:8000/api".replace(/\/+$/, "");
+  apiClient.basePath = "https://thawing-ravine-16596.herokuapp.com/api".replace(/\/+$/, "");
 }
 
 new Vue({
