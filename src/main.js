@@ -10,7 +10,7 @@ import "./plugins/vee-validate.js";
 Vue.config.productionTip = false;
 
 const apiClient = ApiClient.instance;
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV !== "production") {
   apiClient.basePath = "/api";
 } else {
   apiClient.basePath = "https://thawing-ravine-16596.herokuapp.com/api".replace(/\/+$/, "");
